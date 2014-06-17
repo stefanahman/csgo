@@ -2,15 +2,13 @@ FROM kmallea/steamcmd
 
 MAINTAINER Kai Mallea <kmallea@gmail.com>
 
-# Run commands as the steam user
-USER steam
+# Game data should not persist with the container
+VOLUME /opt/csgo
 
 # Install CS:GO
-RUN mkdir /home/steam/csgo &&\
-    cd /home/steam/steamcmd &&\
-    ./steamcmd.sh \
+RUN ./steamcmd.sh \
         +login anonymous \
-        +force_install_dir ../csgo \
+        +force_install_dir /opt/csgo \
         +app_update 740 validate \
         +quit
 
@@ -18,5 +16,5 @@ RUN mkdir /home/steam/csgo &&\
 EXPOSE 27015
 
 # This container will be executable
-WORKDIR /home/steam/csgo
+WORKDIR /opt/csgo
 ENTRYPOINT ["./srcds_run"]
