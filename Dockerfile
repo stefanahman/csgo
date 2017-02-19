@@ -10,7 +10,7 @@ RUN mkdir /home/steam/csgo &&\
     cd /home/steam/steamcmd &&\
     ./steamcmd.sh \
         +login anonymous \
-        +force_install_dir ../csgo \
+        +force_install_dir /home/steam/csgo \
         +app_update 740 validate \
         +quit
 
